@@ -53,11 +53,15 @@ if st.button("🔍 Analyse Resume"):
         st.warning(f"Total Skill Gap Penalty: -{total_gap}%")
 
 
-        st.subheader("🏆 Job Role Match")
-        role_scores = calculate_role_match(resume_text)
-        for role, score in role_scores.items():
-            st.write(f"{role} → {score}%")
-            st.progress(score / 100)
+        st.subheader("🚩 Resume Red Flags")
+        flags = detect_red_flags(resume_text)
+
+        if len(flags) == 0:
+            st.success("No major red flags detected")
+        else:
+            for f in flags:
+                st.error(f)
+
 
         st.subheader("💪 Strength Summary")
         st.success(generate_strength_summary(resume_text))
@@ -109,4 +113,5 @@ if st.button("🔍 Analyse Resume"):
             st.warning("🟡 Candidate kept in WAITING LIST")
         else:
             st.error("❌ Candidate REJECTED for this Job")
+
 

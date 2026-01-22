@@ -30,20 +30,19 @@ def calculate_skill_gap(resume_text):
     return gap_score, total_gap
 
 
-JOB_ROLE_SKILLS = {
-    "Data Analyst": ["python", "sql", "excel", "powerbi", "statistics"],
-    "Data Scientist": ["python", "machine learning", "statistics", "nlp"],
-    "ML Engineer": ["python", "machine learning", "deep learning"],
-    "Business Analyst": ["excel", "sql", "dashboard", "business"]
-}
-
-def calculate_role_match(resume_text):
+def detect_red_flags(resume_text):
     text = resume_text.lower()
-    scores = {}
-    for role, skills in JOB_ROLE_SKILLS.items():
-        match = sum(1 for s in skills if s in text)
-        scores[role] = int((match / len(skills)) * 100)
-    return scores
+    flags = []
+    if len(text.split()) < 150:
+        flags.append("Resume is too short")
+    if not any(char.isdigit() for char in text):
+        flags.append("No quantifiable achievements found")
+    edu_words = ["bachelor", "master", "degree", "b.sc", "b.tech", "mba"]
+    if not any(word in text for word in edu_words):
+        flags.append("Education details missing")
+    if "skill" not in text:
+        flags.append("Skills section not mentioned")
+    return flags
 
 
 STRENGTH_KEYWORDS = {
@@ -193,4 +192,5 @@ def final_candidate_decision(ats_score, jd_fit, consistency):
         return "WAITING"
     else:
         return "REJECT"
+
 

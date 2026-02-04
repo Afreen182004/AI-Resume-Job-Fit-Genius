@@ -2,7 +2,7 @@ import streamlit as st
 import PyPDF2
 from logic import *
 
-st.set_page_config(page_title="AI Resume Analyzer", layout="wide")
+st.set_page_config(page_title="Resume Analyzer", layout="wide")
 
 st.title("🚀 Resume Analyzer & Job Fit Genius")
 st.write("Upload your resume and paste the Job Description to get a complete AI-based analysis")
@@ -113,6 +113,7 @@ if st.button("🔍 Analyse Resume"):
             st.warning("🟡 Candidate kept in WAITING LIST")
         else:
             st.error("❌ Candidate REJECTED for this Job")
+
 
 
 

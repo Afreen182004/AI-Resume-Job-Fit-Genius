@@ -4,7 +4,7 @@ from logic import *
 
 st.set_page_config(page_title="AI Resume Analyzer", layout="wide")
 
-st.title("🚀 AI Resume & Job Fit Genius")
+st.title("🚀 Resume Analyzer & Job Fit Genius")
 st.write("Upload your resume and paste the Job Description to get a complete AI-based analysis")
 
 left_col, right_col = st.columns(2)
@@ -113,5 +113,6 @@ if st.button("🔍 Analyse Resume"):
             st.warning("🟡 Candidate kept in WAITING LIST")
         else:
             st.error("❌ Candidate REJECTED for this Job")
+
 
 
